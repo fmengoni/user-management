@@ -17,8 +17,8 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
     // Lo que retornes acá se convierte en request.user
     return {
       username: payload.username,
-      email: payload.email,
-      roles: payload.roles.map((r: any) => r._id),
+      // email: payload.email,
+      // roles: payload.roles.map((r: any) => r._id),
     };
   }
 }

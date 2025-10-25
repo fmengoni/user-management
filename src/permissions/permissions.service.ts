@@ -3,6 +3,7 @@ import { PermissionEntity } from './model/permission.entity';
 import { RoleEntity } from '../roles/model/role.entity';
 import { PermissionMongoRepository } from './repository/permission.repository';
 import { IPermission } from '../users/types/permission.type';
+import { Types } from 'mongoose';
 
 @Injectable()
 export class PermissionsService {
@@ -16,28 +17,22 @@ export class PermissionsService {
     });
   }
 
-  async findByIds(allPermissionIds: (string | PermissionEntity)[]) {
+  async findByIds(allPermissionIds: Types.ObjectId[]) {
     return await Promise.all(
       allPermissionIds.map((p) => {
-        return this.findById(p instanceof PermissionEntity ? p.id : p);
+        return this.findById(p._id);
       }),
     );
   }
 
-  async findById(_id: string) {
-    return await this.permissionMongoRepository.findByKey(_id);
+  async findById(_id: Types.ObjectId): Promise<PermissionEntity> {
+    return await this.permissionMongoRepository.findByKey(_id.toHexString());
   }
 
   async findAllByRole(role: RoleEntity): Promise<PermissionEntity[]> {
     return await Promise.all(
       role.permissions.map((p) => {
-        let id: string;
-        if (p instanceof PermissionEntity) {
-          id = p.id;
-        } else {
-          id = p;
-        }
-        return this.findById(id);
+        return this.findById(new Types.ObjectId(p.id));
       }),
     );
   }

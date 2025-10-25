@@ -1,6 +1,6 @@
 import mongoose, { Connection } from 'mongoose';
-import IDatabase from 'src/domain/database/database.interface';
-import MongoDBException from 'src/domain/exceptions/mongodb.exception';
+import IDatabase from '../../domain/database/database.interface';
+import MongoDBException from '../../domain/exceptions/mongodb.exception';
 
 export class MongoDatabase implements IDatabase {
   private session: mongoose.ClientSession | null = null;

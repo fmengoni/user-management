@@ -1,4 +1,4 @@
-import PermissionViewModel from 'src/permissions/viewModel/permission.viewmodel';
+import PermissionViewModel from '../../permissions/viewModel/permission.viewmodel';
 import ViewModel from '../../infra/views/base.viewmodel';
 import { RoleEntity } from '../../roles/model/role.entity';
 

@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import MongoRepository from '../../infra/repositories/mongo.repository';
 import { MONGO_DATABASE_PROVIDER } from '../../infra/database/database.module';
 import { MongoDatabase } from '../../infra/database/mongo.database';
-import { PermissionEntity } from 'src/permissions/model/permission.entity';
+import { PermissionEntity } from '../../permissions/model/permission.entity';
 import { PermissionSchema } from '../schema/permission.schema';
 import { IPermissionRepository } from './permission.repository.interface';
 

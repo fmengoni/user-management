@@ -1,5 +1,5 @@
-import mongoose, { FilterQuery, SortOrder } from 'mongoose';
-import MongoDBException from 'src/domain/exceptions/mongodb.exception';
+import mongoose, { FilterQuery, SortOrder, Types } from 'mongoose';
+import MongoDBException from '../../domain/exceptions/mongodb.exception';
 import { MongoDatabase } from '../database/mongo.database';
 
 import EntityModel from 'src/domain/entities/base.entity';
@@ -34,7 +34,8 @@ class MongoRepository<T extends EntityModel> implements IRepository<T> {
 
   async create(entity: T): Promise<T> {
     try {
-      const model = new this.model(this.mapToPersistence(entity));
+      // const model = new this.model(this.mapToPersistence(entity));
+      const model = new this.model(entity);
       const record = await model.save();
 
       return this.mapToEntity(record);
@@ -107,8 +108,8 @@ class MongoRepository<T extends EntityModel> implements IRepository<T> {
     };
   }
 
-  async findByKey(key: string | number): Promise<T> {
-    const record = await this.model.findById(key);
+  async findByKey(key: string): Promise<T> {
+    const record = await this.model.findById(new Types.ObjectId(key));
 
     if (!record)
       throw new MongoDBException(

@@ -5,7 +5,7 @@ const secret = 'dev-secret'; // mismo que usa tu JwtStrategy
 // Lo que tu JwtStrategy espera en el payload
 const payload = {
   username: 'fmengoni',
-  roles: [{ _id: '5e486f22-0986-4fb9-b1c9-83bac79ee306' }],
+  roles: [{ _id: '68fbe6a54e612b3c65a0fd39' }],
 };
 
 // Firmamos el token (1 hora de duración)

@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { PermissionsController } from './permissions.controller';
 import { PermissionsService } from './permissions.service';
-import { PermissionMongoRepository } from 'src/permissions/repository/permission.repository';
+import { PermissionMongoRepository } from '../permissions/repository/permission.repository';
 
 @Module({
   controllers: [PermissionsController],

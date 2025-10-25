@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { UsersController } from './users.controller';
-import { UserMongoRepository } from 'src/users/repository/user.repository';
-import { RolesModule } from 'src/roles/roles.module';
+import { UserMongoRepository } from '../users/repository/user.repository';
+import { RolesModule } from '../roles/roles.module';
 
 @Module({
   imports: [RolesModule],

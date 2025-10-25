@@ -1,8 +1,8 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { RolesService } from './roles.service';
-import { IRole } from 'src/users/types/role.type';
-import ViewModel from 'src/infra/views/base.viewmodel';
-import RoleViewModel from 'src/roles/viewModel/role.viewmodel';
+import { IRole } from '../users/types/role.type';
+import ViewModel from '../infra/views/base.viewmodel';
+import RoleViewModel from '../roles/viewModel/role.viewmodel';
 
 @Controller('roles')
 export class RolesController {

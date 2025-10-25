@@ -9,7 +9,6 @@ import { UserMongoRepository } from './users/repository/user.repository';
 import { UsersService } from './users/users.service';
 import { PermissionsModule } from './permissions/permissions.module';
 import { RolesModule } from './roles/roles.module';
-import { LoggerModule } from './logger/logger.module';
 
 @Module({
   imports: [
@@ -22,7 +21,6 @@ import { LoggerModule } from './logger/logger.module';
     UsersModule,
     PermissionsModule,
     RolesModule,
-    LoggerModule,
   ],
   controllers: [AppController],
   providers: [AppService, UserMongoRepository, UsersService],

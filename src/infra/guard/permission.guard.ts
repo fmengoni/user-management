@@ -7,7 +7,8 @@ import {
 import { Reflector } from '@nestjs/core';
 import { PERMISSIONS_KEY } from '../decorators/permission.decorator';
 import { UsersService } from '../../users/users.service';
-import { PermissionEntity } from 'src/permissions/model/permission.entity';
+import { PermissionEntity } from '../../permissions/model/permission.entity';
+import { RoleEntity } from '../../roles/model/role.entity';
 
 @Injectable()
 export class PermissionsGuard implements CanActivate {
@@ -29,12 +30,16 @@ export class PermissionsGuard implements CanActivate {
     if (!user) throw new ForbiddenException('User not found');
 
     // Obtener permisos efectivos del usuario (a través de sus roles)
-    const roleEntities = await this.usersService.getUserRoles(user.username);
+    const userEntities = await this.usersService.findByUsername(user.username);
 
-    const userPermissions = roleEntities.flatMap((role) =>
-      role.permissions.map((p) => {
-        return p instanceof PermissionEntity ? p.permission : p;
-      }),
+    const userPermissions = userEntities.roles.flatMap((role) => {
+        if( role instanceof RoleEntity){
+          return role.permissions.map((p) => {
+            return p instanceof PermissionEntity ? p.permission : p;
+          });
+        }
+        return [];
+      }
     );
     const uniqueUserPermissions = [...new Set(userPermissions)];
 

@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { RoleEntity } from 'src/roles/model/role.entity';
+import { RoleEntity } from '../../roles/model/role.entity';
 import MongoRepository from '../../infra/repositories/mongo.repository';
 import { RoleSchema } from '../schema/role.schema';
 import { IRoleRepository } from './role.repository.interface';

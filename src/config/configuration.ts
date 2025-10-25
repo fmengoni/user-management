@@ -8,6 +8,7 @@ export default () => ({
     user: process.env.MONGO_DB_USER,
     password: process.env.MONGO_DB_PASS,
     host: process.env.MONGO_DB_URL,
+    port: process.env.MONGO_DB_PORT,
     schema: process.env.MONGO_DB_SCHEMA,
   },
 });

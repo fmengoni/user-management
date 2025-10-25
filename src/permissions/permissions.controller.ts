@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
-import ViewModel from 'src/infra/views/base.viewmodel';
-import { IPermission } from 'src/users/types/permission.type';
+import ViewModel from '../infra/views/base.viewmodel';
+import { IPermission } from '../users/types/permission.type';
 import { PermissionsService } from './permissions.service';
 import PermissionViewModel from './viewModel/permission.viewmodel';
 

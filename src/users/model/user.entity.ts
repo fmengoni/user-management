@@ -1,3 +1,4 @@
+import { Types } from 'mongoose';
 import EntityModel from '../../domain/entities/base.entity';
 import { RoleEntity } from '../../roles/model/role.entity';
 
@@ -7,7 +8,7 @@ export class UserEntity extends EntityModel {
   public email: string;
   public password: string;
   public salt: string;
-  public roles: (string | RoleEntity)[];
+  public roles: (Types.ObjectId | RoleEntity)[];
 
   constructor(data: Record<string, any>) {
     super(data);

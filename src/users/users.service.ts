@@ -4,7 +4,8 @@ import { UserMongoRepository } from './repository/user.repository';
 import { IUser } from './types/user.type';
 import * as bcrypt from 'bcryptjs';
 import { RolesService } from '../roles/roles.service';
-import { RoleEntity } from 'src/roles/model/role.entity';
+import { RoleEntity } from '../roles/model/role.entity';
+import { Types } from 'mongoose';
 
 @Injectable()
 export class UsersService {
@@ -13,22 +14,16 @@ export class UsersService {
     private readonly roleService: RolesService,
   ) {}
 
-  async getUserRoles(username: string) {
-    const user = await this.userMongoRepository.findOne({
-      where: { username },
-    });
-
-    const rolesEntities = this.roleService.findByIds(user.roles);
-
-    return rolesEntities;
-  }
-
   async findByUsername(username: string): Promise<UserEntity> {
     const userEntity = await this.userMongoRepository.findOne({
       where: { username },
     });
 
-    const rolesEntities = await this.roleService.findByIds(userEntity.roles);
+    const rolesEntities = await this.roleService.findByIds(
+      userEntity.roles.map((r) => {
+        return r instanceof RoleEntity ? new Types.ObjectId(r.id): r;
+      })
+    );
 
     userEntity.roles = rolesEntities;
     return userEntity;
@@ -49,7 +44,7 @@ export class UsersService {
         UserEntity.build({
           email: user.email,
           password: await bcrypt.hash(user.password, salt),
-          roles: user.roles.map((r) => r._id),
+          roles: user.roles.map((r) => new Types.ObjectId(r._id)),
           salt: salt,
           username: user.username,
         }),
@@ -59,7 +54,7 @@ export class UsersService {
     }
 
     entity.roles = await this.roleService.findByIds(
-      user.roles.map((r) => r._id),
+      user.roles.map((r) => new Types.ObjectId(r._id)),
     );
     return entity;
   }

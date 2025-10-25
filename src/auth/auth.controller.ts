@@ -1,10 +1,10 @@
 import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { JwtAuthGuard } from 'src/infra/guard/jwt-auth.guard';
-import { UsersService } from 'src/users/users.service';
+import { JwtAuthGuard } from '../infra/guard/jwt-auth.guard';
+import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
-import ViewModel from 'src/infra/views/base.viewmodel';
-import UserViewModel from 'src/users/viewModel/users.viewmodel';
+import ViewModel from '../infra/views/base.viewmodel';
+import UserViewModel from '../users/viewModel/users.viewmodel';
 
 @Controller('auth')
 export class AuthController {
